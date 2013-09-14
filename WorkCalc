@@ -95,18 +95,18 @@ public class WorkCalc
               break;
          default:
       	     System.out.println("Not a mode!");
-         }
+        }
 
 	 //summary
-         System.out.println("---------");
-         System.out.printf("Projected is %f\nGoal is %f\nTime scheduled is %f\nTime needed to hit goal is %f", projected, goal, scheduled, timeNeeded2);	
-         System.out.println("\n---------");
-         keyboard.nextLine();
-	 System.out.println("Would you like to see a projection for your time worked? Y/N");
-	 input = keyboard.nextLine();
-	 if (input.charAt(0) == 'Y' || input.charAt(0) == 'y')
-	 	projection();
-	 else // couldn't figure out how to make the else do absolutely nothing
+       System.out.println("---------");
+       System.out.printf("Projected is %f\nGoal is %f\nTime scheduled is %f\nTime needed to hit goal is %f", projected, goal, scheduled, timeNeeded2);	
+       System.out.println("\n---------");
+       keyboard.nextLine();
+       System.out.println("Would you like to see a projection for your time worked? Y/N");
+       input = keyboard.nextLine();
+       if (input.charAt(0) == 'Y' || input.charAt(0) == 'y')
+ 	projection();
+        else // couldn't figure out how to make the else do absolutely nothing
 	 	System.out.println();			
 									
    }
@@ -114,27 +114,28 @@ public class WorkCalc
 	public static void projection()
 	{
 	 double days;
-         double daily;
-         double total = 0;
-         double randomN;
-         double randomD;
+    	 double daily;
+    	 double total = 0;
+	 double randomN;
+	 double randomD;
 	 double randomZ;
          double randomTotal = 0;				
-         Scanner keyboard = new Scanner(System.in);								
+	 Scanner keyboard = new Scanner(System.in);								
          System.out.println("How many days do you want to calculate for?");
-         days = keyboard.nextDouble();				
-         System.out.println("How much do you make each day?");
-         daily = keyboard.nextDouble();				
-         for (int r = 1; r <= days; r++)
-         {
-            System.out.print("Day " + r);
-            Random random = new Random();
-	    //only way I could figure out how to make a random #.##
-            randomN = random.nextInt((int)(.4*daily)) - ((int)(.2*daily));
-	    randomD = random.nextDouble() - random.nextDouble();
-	    randomZ = randomN+randomD;
-	    randomTotal += randomZ;
-            total += daily + randomZ;
-            System.out.printf(" Total: %.2f. Random: %.2f. Random deviance: %.2f.\n", total, randomZ, randomTotal);			}
+    	 days = keyboard.nextDouble();				
+    	 System.out.println("How much do you make each day?");
+    	 daily = keyboard.nextDouble();				
+	 for (int r = 1; r <= days; r++)
+	 {
+    	   System.out.print("Day " + r);
+      	   Random random = new Random();
+	   //only way I could figure out how to make a random #.##
+           randomN = random.nextInt((int)(.4*daily)) - ((int)(.2*daily));
+	   randomD = random.nextDouble() - random.nextDouble();
+	   randomZ = randomN+randomD;
+	   randomTotal += randomZ;
+           total += daily + randomZ;
+           System.out.printf(" Total: %.2f. Random: %.2f. Random deviance: %.2f.\n", total, randomZ, randomTotal);
 	 }
         }
+}
