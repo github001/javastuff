@@ -1,0 +1,140 @@
+/* This program will gather a few things.
+  How many minutes you worked today
+  How much you made prior to today
+  How many hours do you currently have scheduled
+  How many days left in the pay period
+  What is your paycheck goal.
+  
+ It'll then spit out how much you're projected to make, and how many hours you
+ need to hit the goal, and other details	
+*/
+
+import java.text.DecimalFormat;
+import java.util.Scanner;
+import java.util.Random;
+
+public class WorkCalc
+{
+	public static void main(String args[])
+   {
+ 	  int mode; // Worst case I work 66% of the time I'm scheduled, average is 75-80%
+     double minuteRate = 0.35; // Pay per minute
+     double minutes; // minutes worked today
+     double goal; // paycheck goal
+     double already; // money made including today
+     double timeNeeded; // How many hours I need to hit my goal
+     double scheduled; // how many hours I have scheduled
+     double money; // money made before today
+     double days; // days left in pay period
+     double timeNeeded2; // I only talk a % of the time I'm scheduled
+     double projected; // based on already and hours schedueld
+	  String input;  // window input
+     
+          
+     DecimalFormat formatter = new DecimalFormat("#,##0.00");
+     Scanner keyboard = new Scanner(System.in);
+      
+      //window input screens
+     System.out.println("Mode 1 (66% Talktime), Mode 2 (75% Talktime), or Mode 3(80% Talktime)?");
+     mode = keyboard.nextInt();
+     System.out.println("How many minutes worked today?");
+     minutes = keyboard.nextDouble();
+     System.out.println("How much money have you made so far?");
+     money = keyboard.nextDouble();
+     System.out.println("How many hours scheduled?");
+     scheduled = keyboard.nextDouble();
+     System.out.println("How many days are left in the pay period?");
+     days = keyboard.nextDouble();
+     System.out.println("Whats your paycheck goal?");
+     goal = keyboard.nextDouble();
+      //define further variables from input  
+     already = money + (minutes * minuteRate);
+     timeNeeded = (goal - already) / (minuteRate * 60);
+     if (mode == 1)
+     	{timeNeeded2 = timeNeeded * 1.50;  
+       projected = already + ((scheduled * .66) * (minuteRate * 60));}
+     else if (mode == 2)	  
+     	{timeNeeded2 = timeNeeded * 1.333;	  
+      projected = already + ((scheduled * .75) * (minuteRate * 60));}
+     else if (mode == 3)
+     	{timeNeeded2 = timeNeeded * 1.25;	  
+      projected = already + ((scheduled * .80) * (minuteRate * 60));}
+     else 
+     {timeNeeded2 = 1337;
+      projected = 1337;		
+     	System.out.println("Invalid mode!");}
+     //results onscreen
+     System.out.println("Your goal is $" + goal + ". You have made $" + already +
+     	", You need " + formatter.format(timeNeeded2) +
+      " hours scheduled, which is " +
+      formatter.format(timeNeeded) + " hours worked" +
+      ".\nYou already have " + scheduled +
+      " hours scheduled, so you only need " + formatter.format(timeNeeded2 - scheduled) + 
+      " more hours scheduled! With " + days + " days left, you need " + formatter.format((timeNeeded2 - scheduled) / days) + " hours per day");
+    //pep talk  
+     if (already >= goal && days > 3)
+     	System.out.println("You're ahead of schedule!");
+     else if (projected >= goal)
+     	System.out.println("At this rate you'll make $" + projected +
+     	". You're on pace!");
+     else if (projected >= (goal *.85))
+     	System.out.println("Almost there, just a bit more!");
+     else
+     	System.out.println("Pick it up man!");
+       
+     switch (mode)
+     	{
+        	case 1:
+              System.out.println("Rate: 66%. Scheduled: " + scheduled + " Money made already: " + already + ".");
+              break;
+         case 2:
+              System.out.println("Rate: 75%. Scheduled: " + scheduled + " Money made already: " + already + ".");	 
+              break;
+         case 3:
+              System.out.println("Rate: 80%. Scheduled: " + scheduled + " Money made already: " + already + ".");	 
+              break;
+         default:
+      	     System.out.println("Not a mode!");
+      }
+
+		//summary
+         System.out.println("---------");
+         System.out.printf("Projected is %f\nGoal is %f\nTime scheduled is %f\nTime needed to hit goal is %f", projected, goal, scheduled, timeNeeded2);	
+         System.out.println("\n---------");
+			keyboard.nextLine();
+			System.out.println("Would you like to see a projection for your time worked? Y/N");
+			input = keyboard.nextLine();
+			if (input.charAt(0) == 'Y' || input.charAt(0) == 'y')
+				projection();
+			else // couldn't figure out how to make the else do absolutely nothing
+				System.out.println();			
+									
+   }
+ 		
+		public static void projection()
+		{
+			double days;
+         double daily;
+         double total = 0;
+         double randomN;
+         double randomD;
+			double randomZ;
+         double randomTotal = 0;				
+         Scanner keyboard = new Scanner(System.in);								
+         System.out.println("How many days do you want to calculate for?");
+         days = keyboard.nextDouble();				
+         System.out.println("How much do you make each day?");
+         daily = keyboard.nextDouble();				
+         for (int r = 1; r <= days; r++)
+         {
+            System.out.print("Day " + r);
+            Random random = new Random();
+				//only way I could figure out how to make a random #.##
+            randomN = random.nextInt((int)(.4*daily)) - ((int)(.2*daily));
+				randomD = random.nextDouble() - random.nextDouble();
+				randomZ = randomN+randomD;
+				randomTotal += randomZ;
+            total += daily + randomZ;
+         	System.out.printf(" Total: %.2f. Random: %.2f. Random deviance: %.2f.\n", total, randomZ, randomTotal);			}
+			}
+		}
