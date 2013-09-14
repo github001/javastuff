@@ -15,9 +15,9 @@ import java.util.Random;
 
 public class WorkCalc
 {
-	public static void main(String args[])
+  public static void main(String args[])
    {
- 	  int mode; // Worst case I work 66% of the time I'm scheduled, average is 75-80%
+     int mode; // Worst case I work 66% of the time I'm scheduled, average is 75-80%
      double minuteRate = 0.35; // Pay per minute
      double minutes; // minutes worked today
      double goal; // paycheck goal
@@ -28,7 +28,7 @@ public class WorkCalc
      double days; // days left in pay period
      double timeNeeded2; // I only talk a % of the time I'm scheduled
      double projected; // based on already and hours schedueld
-	  String input;  // window input
+     String input;  // window input
      
           
      DecimalFormat formatter = new DecimalFormat("#,##0.00");
@@ -71,7 +71,7 @@ public class WorkCalc
       ".\nYou already have " + scheduled +
       " hours scheduled, so you only need " + formatter.format(timeNeeded2 - scheduled) + 
       " more hours scheduled! With " + days + " days left, you need " + formatter.format((timeNeeded2 - scheduled) / days) + " hours per day");
-    //pep talk  
+     //pep talk  
      if (already >= goal && days > 3)
      	System.out.println("You're ahead of schedule!");
      else if (projected >= goal)
@@ -84,7 +84,7 @@ public class WorkCalc
        
      switch (mode)
      	{
-        	case 1:
+         case 1:
               System.out.println("Rate: 66%. Scheduled: " + scheduled + " Money made already: " + already + ".");
               break;
          case 2:
@@ -95,30 +95,30 @@ public class WorkCalc
               break;
          default:
       	     System.out.println("Not a mode!");
-      }
+         }
 
-		//summary
+	 //summary
          System.out.println("---------");
          System.out.printf("Projected is %f\nGoal is %f\nTime scheduled is %f\nTime needed to hit goal is %f", projected, goal, scheduled, timeNeeded2);	
          System.out.println("\n---------");
-			keyboard.nextLine();
-			System.out.println("Would you like to see a projection for your time worked? Y/N");
-			input = keyboard.nextLine();
-			if (input.charAt(0) == 'Y' || input.charAt(0) == 'y')
-				projection();
-			else // couldn't figure out how to make the else do absolutely nothing
-				System.out.println();			
+         keyboard.nextLine();
+	 System.out.println("Would you like to see a projection for your time worked? Y/N");
+	 input = keyboard.nextLine();
+	 if (input.charAt(0) == 'Y' || input.charAt(0) == 'y')
+	 	projection();
+	 else // couldn't figure out how to make the else do absolutely nothing
+	 	System.out.println();			
 									
    }
  		
-		public static void projection()
-		{
-			double days;
+	public static void projection()
+	{
+	 double days;
          double daily;
          double total = 0;
          double randomN;
          double randomD;
-			double randomZ;
+	 double randomZ;
          double randomTotal = 0;				
          Scanner keyboard = new Scanner(System.in);								
          System.out.println("How many days do you want to calculate for?");
@@ -129,12 +129,12 @@ public class WorkCalc
          {
             System.out.print("Day " + r);
             Random random = new Random();
-				//only way I could figure out how to make a random #.##
+	    //only way I could figure out how to make a random #.##
             randomN = random.nextInt((int)(.4*daily)) - ((int)(.2*daily));
-				randomD = random.nextDouble() - random.nextDouble();
-				randomZ = randomN+randomD;
-				randomTotal += randomZ;
+	    randomD = random.nextDouble() - random.nextDouble();
+	    randomZ = randomN+randomD;
+	    randomTotal += randomZ;
             total += daily + randomZ;
-         	System.out.printf(" Total: %.2f. Random: %.2f. Random deviance: %.2f.\n", total, randomZ, randomTotal);			}
-			}
-		}
+            System.out.printf(" Total: %.2f. Random: %.2f. Random deviance: %.2f.\n", total, randomZ, randomTotal);			}
+	 }
+        }
