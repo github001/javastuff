@@ -110,7 +110,8 @@ public class WorkCalc
 	 	System.out.println();			
 									
    }
- 		
+ 	//this creates a simulation of how much you'll make each day, using
+ 	//a ~20% variance each day
 	public static void projection()
 	{
 	 double days;
